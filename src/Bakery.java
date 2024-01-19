@@ -142,31 +142,49 @@ public class Bakery {
 
 				//作ったパンの表示
 
-				for (int i = 0; i < breads.size(); i++) {
-					System.out.printf("%d・・・[%s])\n", i, breads.get(i).type);
-				}
+				while (true) {
 
-				//生成したパンの並び替え
+					for (int i = 0; i < breads.size(); i++) {
+						System.out.printf("%d・・・[%s])\n", i, breads.get(i).type);
+					}
 
-				System.out.print("どのパンを売りますか？>>");
-				int sellselect = new Scanner(System.in).nextInt();
+					//生成したパンの並び替え
 
-				if (0 <= sellselect && sellselect < breads.size()) { //  0以上、bread.size未満の数字がはいる
+					//パンの販売
+					System.out.print("どのパンを売りますか？>>");
+					int sellselect = new Scanner(System.in).nextInt();
 
-					System.out.printf("[%s]を販売した！\n", breads.get(sellselect).type);
+					if (0 <= sellselect && sellselect < breads.size()) { //  0以上、bread.size未満の数字がはいる
 
-					earnings += breads.get(sellselect).price; //売上加算
-					breads.remove(sellselect); //選択したパンをリストから消去
-					//earnings += 500; //売上加算
+						System.out.printf("[%s]を販売した！\n", breads.get(sellselect).type);
 
-					System.out.println("一日の売り上げ:" + earnings + "円");
-					System.out.println("残りターン:" + (turn - 1));
-					break;
-				} else {
-					System.out.println("パンがありません!");
-					turn++;
-					break;
+						earnings += breads.get(sellselect).price; //売上加算
+						breads.remove(sellselect); //選択したパンをリストから消去
 
+						System.out.println("一日の売り上げ:" + earnings + "円");
+						System.out.println("残りターン:" + (turn - 1));
+
+						System.out.println("ほかのパンも売る？");
+						System.out.print("1. はい 2. いいえ >>");
+						int choice = new Scanner(System.in).nextInt();
+						if (choice == 1) {
+							continue;
+
+						} else if (choice == 2) {
+
+							break;
+
+						} else {
+							System.out.println("選択肢を選んでください!");
+							
+							break;
+
+						}
+
+					} else {
+						System.out.println("パンがありません!");
+						turn++;
+						break;}
 				}
 
 			case 4: //データ表示
